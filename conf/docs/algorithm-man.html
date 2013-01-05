@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Введение</TITLE>
+
+</HEAD>
+
+<H1><A NAME="SECTION00050000000000000000">
+Плагин, содержащий схему генетического алгоритма</A>
+
+</H1>
+
+<P>
+Основной интерфейс плагина &mdash; <I>AlgorithmLoader</I>.
+
+<P>
+<BR>
+<IMG
+ WIDTH="992" HEIGHT="134" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img7.png"
+ ALT="\begin{lstlisting}
+public interface AlgorithmLoader&lt;I extends Individual&gt; exten...
+...itness&lt;I&gt;&gt; functions);
+\par
+public String getMessage();
+\par
+}
+\end{lstlisting}">
+<BR>
+
+<P>
+
+<UL>
+<LI><I>loadFactories</I> &mdash; метод должен возвращать <I>схему генетического алгоритма</I>, а именно объект класса,
+	 реализующего интерфейс <I>Algorithm</I>.
+
+<BR>
+<IMG
+ WIDTH="557" HEIGHT="134" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img8.png"
+ ALT="\begin{lstlisting}
+public interface Algorithm&lt;I extends Individual&gt; {
+\par
+publ...
+...ublic List&lt;I&gt; getGeneration();
+\par
+public void stop();
+\par
+}
+\end{lstlisting}">
+<BR>
+	Данный интерфейс содержит следующие методы:
+
+<UL>
+<LI><I>nextGeneration</I> &mdash; переход к следующему поколению особей.
+</LI>
+<LI><I>getGeneration</I> &mdash; метод должен возвращать текущее поколение особей.
+</LI>
+<LI><I>stop</I> &mdash; в текущей версии не используется.
+	    
+
+</LI>
+</UL>
+</LI>
+<LI><I>getMessage</I> &mdash; метод должен возвращать сообщение о наличии и правильности 
+	загрузки опрераторов отбора (<I>Selection</I>).
+
+<BR>
+<IMG
+ WIDTH="557" HEIGHT="95" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img9.png"
+ ALT="\begin{lstlisting}
+public interface Selection&lt;I extends Individual&gt; {
+\par
+publ...
+...I&gt;&gt; apply(
+List&lt;FitIndividual&lt;I&gt;&gt; population, int n);
+\par
+}
+\end{lstlisting}">
+<BR>	
+	Единственный метод данного интерфейса должен возвращать список особей, напрямую переходящих в следующее поколение.
+    
+</LI>
+</UL>
+
+</BODY>
+</HTML>

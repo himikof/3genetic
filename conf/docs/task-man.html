@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Введение</TITLE>
+
+</HEAD>
+
+
+
+<H1><A NAME="SECTION00020000000000000000">
+Общие правила</A>
+
+</H1>
+
+<P>
+Все упоминаемые интерфейсы содержатся в файле <I>common.jar</I>, некоторые необязательные,
+    но, возможно, полезные, при написании собственного модуля классы, содержатся в файле <I>util.jar</I>.
+
+
+<P>
+Создание плагина заключается в реализации соответствующего (<I>основного</I>) интерфейса и сборке jar-архива.
+    Для подключения плагина манифест полученного архива должен содержать атрибут <I>Main-Class</I>, 
+    который в свою очередь должен ссылаться на класс реализующий один из интерфейсов, наследников <I>PluginLoader</I>. 
+<BR>
+<P>
+<BR>
+<IMG
+ WIDTH="678" HEIGHT="318" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img1.png"
+ ALT="\begin{lstlisting}
+public interface PluginLoader extends Nameable, Descriptable...
+... interface Descriptable {
+public String getDescription();
+}
+\end{lstlisting}">
+<BR>
+
+<P>
+
+<UL>
+<LI><I>getConfigWriter</I> &mdash; метод должен сохранять конфигурацию плагина в файл, возвращает открытый поток вывода 
+		в записываемый файл;
+</LI>
+<LI><I>getName</I> &mdash; метод должен возвращать название плагина;
+</LI>
+<LI><I>getConfigDialog</I> &mdash; метод должен возвращать диаловое окно с конфигурационными параметрами плагина.
+</LI>
+<LI><I>getDescription</I> &mdash; метод должен возвращать текстовое описание плагина.
+    
+
+</LI>
+</UL>
+
+<P>
+Класс, реализующий этот наследника данного интерфейс, должен иметь конструктор, от объекта класса 
+    (<I>JarFile</I>) (исключение плагин особи). То есть от того архива, где хранится сам плагин.
+
+
+<H1><A NAME="SECTION00030000000000000000">
+Плагин, содержащий описание задачи</A>
+
+</H1>
+
+<P>
+Основной интерфейс плагина &mdash; <I>TaskLoader</I>.
+<BR>
+<IMG
+ WIDTH="557" HEIGHT="43" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img2.png"
+ ALT="\begin{lstlisting}
+public interface TaskLoader extends PluginLoader {
+}
+\end{lstlisting}">
+<BR>
+
+<P>
+Данный интерфейс не содержит дополнительных методов.
+
+<P>
+
+</BODY>
+</HTML>

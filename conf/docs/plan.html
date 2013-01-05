@@ -1,0 +1,67 @@
+<html>
+    <head/>
+    <body>
+        <h1>Справка по созданию плагинов.</h1>
+        
+        <h2>1. Общие правила</h2>
+	    Создание плагина заключается в реализации соответствующего (<i>основного</i>) интерфейса и сборке jar -- архива. 			Для подключения плагина манифест полученного архива должен сдержать ряд атрибутов (эти атрибуты должны принадлежать 		главной группе).
+
+	    Атрибут <FONT FACE="Courier New">Main-Class</FONT> должен ссылаться на класс реализующий один из интерфейсов 
+	    типа <FONT FACE="Courier New">Loader &lt ?></FONT>.
+
+    	Класс, реализующий этот интерфейс, должен иметь конструктор, от объекта класса 
+    	<FONT FACE="Courier New">JarFile</FONT>.
+	    То есть от того архива, где хранится сам плагин.
+	    
+	    <h2>2. Плагин, содержащий представление особи<h2>
+
+    	Основные интерфейсы: <FONT FACE="Courier New">IndividualLoader,  IndividualFactory, Crossover, Mutation</FONT>.
+    	<FONT FACE="Courier New">
+    	<pre>
+public interface IndividualLoader &lt I extends Individual> extends Nameable{
+
+    public List &lt IndividualFactory &lt I>> loadFactories();
+    public List &lt Crossover &lt I>> loadCrossovers();
+    public List &lt Mutation &lt I>> loadMutations();
+    public List &lt Fitness &lt I>> loadFunctions();
+    public JDialog getConfigDialog(JDialog owner);
+    public String getTaskName();
+}
+		</pre>
+		</FONT>
+
+		Как уже говорилось ранее, для реализииданного интерфейса обязателен конствуктор от jar-архива. Методы 
+		<FONT FACE="Courier New">load*</FONT> должны загружать реализации соответствующих интерфейсов. Способ, 
+		которым это делается, полностью зависит от автора плагина. Метод <FONT FACE="Courier New">getConfigDialog</FONT> 
+		должен возвращать окно с настройками данного плагина, если данный метод возвращает null, то в интерфейсе
+		конфигурация данного плагина будет недоступна. Метод <FONT FACE="Courier New">getTaskName</FONT> должен возвращать
+		название задачи, которую данная особь решает.
+		
+		Интерфейсы возвращаетмые методами <FONT FACE="Courier New">load*</FONT> работают сходным образом, для примера
+		приведем <FONT FACE="Courier New">Mutation</FONT>.
+		
+		<FONT FACE="Courier New">
+    	<pre>
+public interface Mutation &lt I extends Individual> {
+    public I apply(I individual);
+}
+		</pre>
+		</FONT>
+        Интерфейс имеет единственный метод --- применение оператора. Данный метод должен возвращать новую особь, а не
+        изменять старую.
+        
+        Остальные типы плагинов имеют схожие интерфейсы, с описанными в данном параграфе.
+	
+	<h2>3. Полезные ссылки</h2>
+		1. <a href="http://svn2.assembla.com/svn/not_instrumental_tool"> http://svn2.assembla.com/svn/not_instrumental_tool
+		</a> --- репозиторий проекта, содержащий исходные коды
+		и примеры плагинов.
+		<p>
+		2. <a href="http://rain.ifmo.ru/cat/view.php/theory/unsorted/genetic-2005"> 
+		http://rain.ifmo.ru/cat/view.php/theory/unsorted/genetic-2005 </a> --- Статья по генетическим алгоритмам.
+		
+    </body>
+    
+	
+</html>
+    

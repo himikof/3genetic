@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Введение</TITLE>
+
+</HEAD>
+
+
+
+<H1><A NAME="SECTION00040000000000000000">
+Плагин, содержащий представление особи</A>
+
+</H1>
+
+<P>
+Основной интерфейс плагина &mdash; <I>IndividualLoader</I>.
+
+<P>
+<BR>
+<IMG
+ WIDTH="616" HEIGHT="202" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img3.png"
+ ALT="\begin{lstlisting}
+public interface IndividualLoader&lt;I extends Individual&gt;
+e...
+...ess&lt;I&gt;&gt; loadFunctions();
+public String getTaskName();
+}
+\end{lstlisting}">
+<BR>
+
+<P>
+Данный интерфейс содержит следующие методы:
+
+<UL>
+<LI><I>loadFactories</I> &mdash; метод должен возвращать <I>фабрику</I> особей, а именно объект класса, реализующего интерфейс
+	    <I>IndividualFactory&lt;I&gt;</I>.
+
+<BR>
+<IMG
+ WIDTH="647" HEIGHT="66" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img4.png"
+ ALT="\begin{lstlisting}
+public interface IndividualFactory&lt;I extends Individual&gt; {
+public I getIndividual();
+}
+\end{lstlisting}">
+<BR>
+	    Единственный метод этого интерфейса должен возвращать случайно сгенерированную особь (интерфейс <I>Individual</I>).
+<BR>
+<IMG
+ WIDTH="397" HEIGHT="66" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img5.png"
+ ALT="\begin{lstlisting}
+public interface Individual {
+public double standardFitness();
+}
+\end{lstlisting}">
+<BR>
+	    Метод <I>standardFitness</I> должен возвращать фитнесс-функцию для задачи, которую решает данная особь.
+</LI>
+<LI><I>loadCrossovers</I> &mdash; метод должен возращать список доступных операторов скрещивания.
+
+<BR>
+<IMG
+ WIDTH="557" HEIGHT="66" ALIGN="BOTTOM" BORDER="0"
+ SRC="man.files/img6.png"
+ ALT="\begin{lstlisting}
+public interface Crossover&lt;I extends Individual&gt; {
+public List&lt;I&gt; apply(List&lt;I&gt; parents);
+}
+\end{lstlisting}">
+<BR>
+	    Метод <I>apply</I> по списку родительких особей должен возвражать список потомков, отдельно отметим, что 
+	    особи потомков должны быть <B>новыми</B> объектами, это требуется для корректной работы алгоритма. 
+</LI>
+<LI><I>loadMutations. loadFunctions</I> &mdash; методы аналогичны методу <I>loadCrossovers</I>, 
+	    должны возращать список доступных операторов мутации и подсчета фитнесс-функции.
+
+</LI>
+<LI><I>getTaskName</I> &mdash; метод должен возращать название задачи, которую решает данная особь.
+    
+</LI>
+</UL>
+
+</BODY>
+</HTML>

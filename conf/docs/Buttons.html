@@ -1,0 +1,226 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="Buttons_files/filelist.xml">
+<link rel=Edit-Time-Data href="Buttons_files/editdata.mso">
+
+
+<title>Запуск виртуальной лаборатории</title>
+<B>Пример запуска виртуальной лаборатории</B>
+
+<P>
+Опишем процесс запуска виртуальной лаборатории на примере решения задачи об "умном муравье"
+	c помощью канонического генетического алгоритма. Чтобы осуществить запуск необходимо выполнить
+	действия, описанные ниже.
+
+<P>
+
+<OL>
+<LI>Убедиться в наличие соответствующих плагинов:
+
+<UL>
+<LI><I>tasks/ant.jar</I> &mdash; плагин задачи об "умном муравье";
+</LI>
+<LI><I>algorithms/simple.jar</I> &mdash; плагин канонического генетического алгоритма;
+
+</LI>
+<LI><I>individuals/mealy.jar</I> &mdash; особь, представляющая собой конечный автомат Мили, для задачи об "Умном муравье";
+</LI>
+<LI><I>functors/max.jar</I> &mdash; плагин для отображения графика функции максимальной функции приспособленности от номера поколения;
+</LI>
+<LI><I>functors/mean.jar</I> &mdash; плагин для отображения графика функции максимальной функции приспособленности от номера поколения;
+</LI>
+<LI><I>visualizators/sAnt.jar</I> &mdash; визуализатор для особи mealy.
+			
+</LI>
+
+</UL>
+
+<P>
+</LI>
+<LI>Запускаем виртуальную лабораторию при помощи:
+
+<UL>
+<LI><I>3genetic.bat</I> &mdash; для операционной системы <I>Windows</I>;
+</LI>
+<LI><I>3genetic.sh</I> &mdash; для <I>Unix-like</I> операционных систем.
+			
+
+</LI>
+</UL>	
+
+<P>
+
+<P>
+</LI>
+<LI>В появившемся окне (рис. <A HREF="#start_window">1</A>) нажимаем на кнопку <I>Next</I>.
+			
+<DIV ALIGN="CENTER"><A NAME="start_window"></A><A NAME="31"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 1:</STRONG>
+Стартовое окно виртуальной лаборатории</CAPTION>
+
+<TR><TD>
+		 		<IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./1.png"
+ ALT="Image 1">
+		 		</TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>Теперь на экране (рис. <A HREF="#task_window">2</A>) можно видеть описание задач. В меню слева выбираем задачу <I>Ant</I> 
+		    и нажимаем на кнопку <I>Next</I>.
+			
+
+<DIV ALIGN="CENTER"><A NAME="task_window"></A><A NAME="39"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 2:</STRONG>
+Окно выбора задачи</CAPTION>
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./2.png"
+ ALT="Image 2"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>В меню выбора особи (рис. <A HREF="#individual_window">3</A>) выбираем особь <I>Mealy Automaton</I> и нажимаем на кнопку <I>Next</I>.
+		 	
+
+<DIV ALIGN="CENTER"><A NAME="individual_window"></A><A NAME="47"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 3:</STRONG>
+Окно выбора задачи</CAPTION>
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./3.png"
+ ALT="Image 3"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>В появившемся окне (рис. <A HREF="#ga_window">4</A>) находится меню выбора схемы генетического алгоритма, выбираем
+	 		<I>Canonical</I> нажимаем на кнопку <I>Load</I>. Алгоритм готов к работе.
+	 		
+
+<DIV ALIGN="CENTER"><A NAME="ga_window"></A><A NAME="55"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 4:</STRONG>
+Окно выбора схемы генетического алгоритма</CAPTION>
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./4.png"
+ ALT="Image 4"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>Для управления работой алгоритма используются соответствующие кнопки (рис. <A HREF="#ga_graphic">5</A>):
+
+
+<UL>
+<LI><I>Start/Stop</I> &mdash; запуск/остановка алгоритма;
+</LI>
+<LI><I>Pause/Continue</I> &mdash; постановка алгоритма на паузу/продолжение работы алгоритма после постановки на паузу.
+	 		
+</LI>
+</UL>
+	 	  
+<DIV ALIGN="CENTER"><A NAME="ga_graphic"></A><A NAME="65"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 5:</STRONG>
+Окно управления работой генетического алгоритма</CAPTION>
+
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./5.png"
+ ALT="Image 5"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>Нажимаем кнопку <I>Start</I>, на экране появляются графики максимальной и средней фитнесс-функции от номера поколения (рис. <A HREF="#ga_result">6</A>).
+			После получения желаемых значений нажимаем кнопку <I>Pause</I>.
+			
+<DIV ALIGN="CENTER"><A NAME="ga_result"></A><A NAME="73"></A>
+<TABLE>
+
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 6:</STRONG>
+Статистика работы генетического алгоритма</CAPTION>
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./6.png"
+ ALT="Image 6"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>При нажатии в меню на кнопку <I>Show</I>, появляется возможность просмотреть лучших особей каждого 
+	 		поколения и любую особь из текущего поколения. Нажимаем на кнопку <I>Best individuals</I>.
+
+
+<P>
+</LI>
+<LI>В появившемся окне выбираем особь, которую хотим посмотреть (рис. <A HREF="#individual_show">7</A>). Нажимаем на кнопку <I>OK</I>.
+		 	
+<DIV ALIGN="CENTER"><A NAME="individual_show"></A><A NAME="82"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 7:</STRONG>
+Окно выбора особи для просмотра</CAPTION>
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./7.png"
+ ALT="Image 7"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<P>
+</LI>
+<LI>Выбираем визуализатор <I>Chebotareva's visualizator</I>. Нажимаем на кнопку <I>OK</I>. Открывается окно в выбранной особью (рис. <A HREF="#choose">8</A>).
+		 	
+<DIV ALIGN="CENTER"><A NAME="choose"></A><A NAME="90"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Рис. 8:</STRONG>
+Окно выбора особи для просмотра</CAPTION>
+
+<TR><TD><IMG
+  WIDTH="717" HEIGHT="538" ALIGN="BOTTOM" BORDER="0"
+ SRC="./8.png"
+ ALT="Image 8"></TD></TR>
+</TABLE>
+</DIV>
+</LI>
+</OL>
+
+</body>
+
+</html>

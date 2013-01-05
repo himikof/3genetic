@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+
+<project name="Virtual Laboratory" default="build">
+
+    <property file="build.properties"/>
+
+    <target name="build" depends="build.main, build.algorithms, build.tasks, build.individuals, build.visualizators, build.functors">
+        <copy todir="${deploy}/${resources}">
+            <fileset dir="${resources}"/>
+        </copy>
+        <copy todir="${deploy}/${lib-dir}">
+            <fileset dir="${lib-dir}"/>
+        </copy>
+        <copy file="build.properties" todir="${deploy}"/>
+    </target>
+
+
+    <property name="common.build" value="${build}/common"/>
+    <property name="util.build" value="${build}/util"/>
+
+
+    <target name="build.module">
+        <mkdir dir="${module.build}"/>
+        <javac
+                srcdir="${module.src}"
+                destdir="${module.build}"
+                classpath="${module.classpath}"
+                debug="${debug}"
+        />
+        <jar destfile="${deploy}/${module.jar}">
+            <fileset dir="${module.build}"/>
+        </jar>
+    </target>
+
+
+    <target name="build.main">
+        <mkdir dir="${deploy}"/>
+        <antcall target="build.module">
+            <param name="module.src" value="${common.src}"/>
+            <param name="module.build" value="${common.build}"/>
+            <param name="module.jar" value="common.jar"/>
+            <param name="module.classpath" value="${common.build}"/>
+        </antcall>
+        <antcall target="build.module">
+            <param name="module.src" value="${util.src}"/>
+            <param name="module.build" value="${util.build}"/>
+            <param name="module.jar" value="util.jar"/>
+            <param name="module.classpath" value="${common.build}"/>
+        </antcall>
+        <antcall target="build.module">
+            <param name="module.src" value="${core.src}"/>
+            <param name="module.build" value="${build}/core"/>
+            <param name="module.jar" value="core.jar"/>
+            <param name="module.classpath" value="${common.build}; ${util.build}; ${lib}"/>
+        </antcall>
+		<mkdir dir="${deploy}/plugins"/>
+    </target>
+
+
+
+
+    <target name="build.algorithms">
+        <antcall target="build.plugin">
+            <param name="plugin" value="${ga.simple}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
+        </antcall>
+        <antcall target="build.plugin">
+            <param name="plugin" value="${selection.roulette}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
+        </antcall>
+        <antcall target="build.plugin">
+            <param name="plugin" value="${ga.custom}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
+        </antcall>
+        <antcall target="build.plugin">
+            <param name="plugin" value="${selection.custom}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
+        </antcall>
+    </target>
+
+    <target name="build.tasks">
+        <antcall target="build.plugin">
+            <param name="plugin" value="${task.ant}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
+        </antcall>
+        <antcall target="build.plugin">
+            <param name="plugin" value="${task.robot}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
+        </antcall>
+    </target>
+
+
+    <target name="build.individuals">
+    
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.mealy}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.ant}/classes"/>
+        </antcall>
+        
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.mealy.mutation.standard}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.ant}/classes;
+                                                                                 ${build}/plugins/${individual.mealy}/classes"/>
+        </antcall>
+
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.mealy.crossover.standard}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.ant}/classes;
+                                                                                 ${build}/plugins/${individual.mealy}/classes"/>
+        </antcall>
+
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.robot.moore}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes"/>
+        </antcall>
+        
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.robot.moore.mutation.standard}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes;
+                                                                                 ${build}/plugins/${individual.robot.moore}/classes"/>
+        </antcall>
+
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.robot.moore.crossover.standard}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes;
+                                                                                 ${build}/plugins/${individual.robot.moore}/classes"/>
+        </antcall>
+
+    </target>
+
+    <target name="build.visualizators">
+    
+        <antcall target="build.plugin">
+            <param name="plugin" value="${visualizator.sAnt}"/>
+            <param name="plugin.classpath" value="${util.build}; ${common.build}; ${build}/plugins/${task.ant}/classes"/>
+        </antcall>
+
+    </target>
+
+    <target name="build.functors">
+        <antcall target="build.plugin">
+            <param name="plugin" value="${functor.max}"/>
+            <param name="plugin.classpath" value="${common.build}"/>
+        </antcall>
+        <antcall target="build.plugin">
+            <param name="plugin" value="${functor.mean}"/>
+            <param name="plugin.classpath" value="${common.build}"/>
+        </antcall>
+    </target>
+
+    <target name="build.plugin">
+        <echo message="${plugin}"/>
+        <echo message="${plugin.classpath}"/>
+        <fail unless="plugin"/>
+        <property file="${plugin}/plugin.properties" prefix="plugin"/>
+		<mkdir dir="${build}/plugins/${plugin}/classes"/>
+		<mkdir dir="${deploy}/${plugin.destination.folder}"/>
+        <fail unless="plugin.main.class"/>
+        <condition property="plugin.src" value="src">
+            <not>
+                <isset property="plugin.src/"/>
+            </not>
+        </condition>
+        <javac
+                srcdir="${plugin}/src"
+                destdir="${build}/plugins/${plugin}/classes"
+                classpath="${plugin.classpath}"
+                debug="${debug}"
+                />
+        <jar destfile="${deploy}/${plugin.destination.folder}/${plugin.jar.name}">
+            <fileset dir="${build}/plugins/${plugin}/classes"/>
+            <fileset dir="${plugin}/conf"/>
+            <manifest>
+                <attribute name="Main-Class" value="${plugin.main.class}"/>
+            </manifest>            
+        </jar>
+    </target>
+
+	<target name="clean">
+		<delete quiet="true" includeEmptyDirs="true">
+            <fileset dir="${deploy}"/>
+        </delete>
+		<delete quiet="true" includeEmptyDirs="true">
+            <fileset dir="${build}"/>
+        </delete>
+	</target>
+
+</project>

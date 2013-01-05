@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="algorithms/simple/selections/roulette/src"/>
+	<classpathentry kind="src" path="algorithms/custom/selections/custom/src"/>
+	<classpathentry kind="src" path="algorithms/custom/src"/>
+	<classpathentry kind="src" path="individuals/robot/moore/operators/mutations/standard/src"/>
+	<classpathentry kind="src" path="individuals/robot/moore/operators/crossovers/Stcrossover/src"/>
+	<classpathentry kind="src" path="individuals/robot/moore/src"/>
+	<classpathentry kind="src" path="algorithms/simple/src"/>
+	<classpathentry kind="src" path="functors/max/src"/>
+	<classpathentry kind="src" path="functors/mean/src"/>
+	<classpathentry kind="src" path="individuals/mealy/operators/crossovers/Stcrossover/src"/>
+	<classpathentry kind="src" path="individuals/mealy/operators/mutations/standard/src"/>
+	<classpathentry kind="src" path="individuals/mealy/src"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tasks/ant/src"/>
+	<classpathentry kind="src" path="tasks/robot/src"/>
+	<classpathentry kind="src" path="visualizators/sAnt/src"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.14.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.11.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
