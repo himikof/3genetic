@@ -79,10 +79,10 @@
     </target>
 
     <target name="build.tasks">
-        <antcall target="build.plugin">
+        <!--<antcall target="build.plugin">
             <param name="plugin" value="${task.ant}"/>
             <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
-        </antcall>
+        </antcall>-->
         <antcall target="build.plugin">
             <param name="plugin" value="${task.robot}"/>
             <param name="plugin.classpath" value="${common.build}; ${util.build}"/>
@@ -126,7 +126,7 @@
                                                                                  ${build}/plugins/${individual.robot.mealy}/classes"/>
         </antcall>
 
-        <antcall target="build.plugin">
+        <!--<antcall target="build.plugin">
             <param name="plugin" value="${individual.robot.moore}"/>
             <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes"/>
         </antcall>
@@ -141,7 +141,7 @@
             <param name="plugin" value="${individual.robot.moore.crossover.standard}"/>
             <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes;
                                                                                  ${build}/plugins/${individual.robot.moore}/classes"/>
-        </antcall>
+        </antcall>-->
 
     </target>
 
