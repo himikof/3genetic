@@ -10,10 +10,14 @@ public abstract class AbstractRobot implements Robot {
     private final Cell target;
 
     public AbstractRobot(Cell start, Cell target){
-        direction = Direction.RIGHT;
-        current = start;
         this.start = start;
         this.target = target;
+        reset();
+    }
+
+    public void reset() {
+        direction = Direction.RIGHT;
+        current = start;    	
     }
 
     public Direction getDirection(){

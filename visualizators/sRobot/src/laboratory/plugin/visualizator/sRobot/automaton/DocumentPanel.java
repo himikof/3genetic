@@ -1094,7 +1094,7 @@ public class DocumentPanel extends JPanel implements MouseListener, MouseMotionL
                     x, y, i == a.getInitialState()));
             alpha += dalpha;
         }
-        String[] eventNames = {"W", "S"};
+        String[] eventNames = {"S", "W"};
         for(int i = 0;i < a.getNumberStates();i++){
             for (int e = 0; e < 2; ++e) {
                 Automaton.Transition t = a.getTransition(i, e);

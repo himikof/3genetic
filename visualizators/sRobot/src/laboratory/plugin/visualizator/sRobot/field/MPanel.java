@@ -109,4 +109,9 @@ public class MPanel extends JPanel{
         mover.move();
         repaint();
     }
+    
+    public void reset() {
+		mover.reset();
+		repaint();
+	}
 }

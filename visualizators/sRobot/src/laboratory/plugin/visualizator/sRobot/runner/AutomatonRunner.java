@@ -21,9 +21,14 @@ public class AutomatonRunner{
     private AutomatonRunner(Automaton a, SimpleRobot robot){
         this.automaton = a;
         this.robot = robot;
-        currentState = a.getInitialState();
+        reset();
         //nestedMover = (a.getNestedAutomaton() == null) ? null : new AutomatonRunner(a.getNestedAutomaton(), robot);
         nestedMover = null;
+    }
+    
+    public void reset() {
+    	robot.reset();
+    	currentState = automaton.getInitialState();
     }
 
     public boolean move() {
@@ -31,7 +36,7 @@ public class AutomatonRunner{
         Automaton.Transition t = automaton.getTransition(currentState, w);
         int ends = t.getEndState();
         if(ends != -1){
-            char action = automaton.getAction(ends);
+            char action = t.getAction();
             currentState = ends;
             switch(action){
                 case 'L':

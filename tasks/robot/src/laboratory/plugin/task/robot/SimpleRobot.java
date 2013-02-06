@@ -35,7 +35,7 @@ public class SimpleRobot extends AbstractRobot{
     public SimpleRobot(){
         super(START, TARGET);
     }
-
+    
     public boolean W(){
         Cell nextCell = getCurrent().next(getDirection());
         return FIELD[nextCell.x][nextCell.y];

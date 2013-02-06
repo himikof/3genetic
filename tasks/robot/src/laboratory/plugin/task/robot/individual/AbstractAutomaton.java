@@ -35,7 +35,7 @@ public abstract class AbstractAutomaton implements Automaton{
     protected abstract double calcStandartFitness();
 
     public double standardFitness(){
-        System.err.println("standartFitness: " + this.getClass());
+        //System.err.println("standartFitness: " + this.getClass());
         if(fitness == Double.NEGATIVE_INFINITY){
             //fitness = StandardFitness.getInstance().calc(new SimpleMover(this));
             fitness = calcStandartFitness();
