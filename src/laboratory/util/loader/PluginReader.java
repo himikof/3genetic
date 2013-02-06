@@ -1,18 +1,16 @@
 package laboratory.util.loader;
 
-import laboratory.util.functional.Functor1;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilenameFilter;
 import java.io.FileFilter;
-import java.util.jar.JarFile;
-import java.util.jar.Attributes;
-import java.util.Properties;
-import java.util.List;
-import java.util.Arrays;
-import java.net.URLClassLoader;
+import java.io.FilenameFilter;
 import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Arrays;
+import java.util.List;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+
+import laboratory.util.functional.Functor1;
 
 public class PluginReader {
 

@@ -8,8 +8,6 @@ import laboratory.core.InterfaceConfig;
 import javax.swing.*;
 import java.util.List;
 import java.util.Collections;
-import java.util.Arrays;
-import java.util.ArrayList;
 
 public class ShowGenertionAction<I extends Individual> extends ShowIndividualsAction<I> {
 

@@ -3,8 +3,6 @@ package laboratory.plugin.task.robot.individual;
 
 import java.util.Arrays;
 
-import laboratory.plugin.task.robot.StandardFitness;
-
 public abstract class AbstractAutomaton implements Automaton{
 
     private final int initialState;
@@ -33,10 +31,14 @@ public abstract class AbstractAutomaton implements Automaton{
     public void setTransition(int i, int c, Automaton.Transition t){
         transition[i][c] = t;
     }
+    
+    protected abstract double calcStandartFitness();
 
     public double standardFitness(){
+        System.err.println("standartFitness: " + this.getClass());
         if(fitness == Double.NEGATIVE_INFINITY){
-            fitness = StandardFitness.getInstance().calc(new SimpleMover(this));
+            //fitness = StandardFitness.getInstance().calc(new SimpleMover(this));
+            fitness = calcStandartFitness();
         }
         return fitness;
     }
@@ -46,6 +48,10 @@ public abstract class AbstractAutomaton implements Automaton{
         return new Object[]{this};
     }
 
+    protected Automaton.Transition[][] getTransitionData() {
+        return transition;
+    }
+    
     public Automaton.Transition[][] getTransition(){
         Automaton.Transition[][] tr = new Transition[transition.length][];
         for(int i = 0;i < tr.length;i++){

@@ -19,7 +19,7 @@ public class PluginCollection {
 
     private final List<TaskLoader> tasks;
     private final List<IndividualLoader> individuals;
-    private final List<AlgorithmLoader> algorithms;
+    private final List<AlgorithmLoader<? extends Individual>> algorithms;
     private final List<VisualizatorLoader> visualizators;
     private final List<Functor> functors;
     private final List<String> functorNames;
@@ -27,7 +27,8 @@ public class PluginCollection {
     private PluginCollection() {
         tasks = Util.map(getJars(Paths.TASKS), new LoaderFromJar<TaskLoader>());
         individuals = Util.map(getDirs(Paths.INDIVIDUALS), new LoaderFromDir<IndividualLoader>());
-        algorithms = Util.map(getDirs(Paths.ALGORITHMS), new LoaderFromDir<AlgorithmLoader>());
+        algorithms = Util.map(getDirs(Paths.ALGORITHMS), 
+                new LoaderFromDir<AlgorithmLoader<? extends Individual>>());
         visualizators = Util.map(getJars(Paths.VISUALIZATORS), new LoaderFromJar<VisualizatorLoader>()); 
         List<FunctorLoader> functorList = Util.map(getJars(Paths.FUNCTORS), new LoaderFromJar<FunctorLoader>());
 
@@ -56,9 +57,9 @@ public class PluginCollection {
     }
 
     public <I extends Individual> List<AlgorithmLoader<I>> loadAlgorithms() {
-        return Util.map(algorithms, new Functor1<AlgorithmLoader, AlgorithmLoader<I>>() {
+        return Util.map(algorithms, new Functor1<AlgorithmLoader<? extends Individual>, AlgorithmLoader<I>>() {
             @SuppressWarnings("unchecked")
-            public AlgorithmLoader<I> apply(AlgorithmLoader algorithmLoader) {
+            public AlgorithmLoader<I> apply(AlgorithmLoader<? extends Individual> algorithmLoader) {
                 return (AlgorithmLoader<I>) algorithmLoader;
             }
         });

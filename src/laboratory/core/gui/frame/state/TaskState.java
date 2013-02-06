@@ -4,15 +4,12 @@ import laboratory.common.loader.TaskLoader;
 import laboratory.common.loader.PluginLoader;
 import laboratory.common.loader.IndividualLoader;
 import laboratory.core.PluginCollection;
-import laboratory.core.InterfaceConfig;
 import laboratory.core.gui.frame.SelectionFrame;
 import laboratory.util.functional.Util;
 import laboratory.util.functional.Functor1;
 
 import javax.swing.*;
 import java.util.List;
-import java.net.URL;
-import java.io.IOException;
 
 public class TaskState extends AbstractState {
 

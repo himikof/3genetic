@@ -1,15 +1,18 @@
 package laboratory.plugin.task.robot;
 
+
 public abstract class AbstractRobot implements Robot {
 
     private Direction direction;
 
     private Cell current;
+    private final Cell start;
     private final Cell target;
 
     public AbstractRobot(Cell start, Cell target){
         direction = Direction.RIGHT;
         current = start;
+        this.start = start;
         this.target = target;
     }
 
@@ -21,6 +24,10 @@ public abstract class AbstractRobot implements Robot {
         return current;
     }
     
+    public Cell getStart() {
+        return start;
+    }
+
     public Cell getTarget() {
         return target;
     }

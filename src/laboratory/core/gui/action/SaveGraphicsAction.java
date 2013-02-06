@@ -2,7 +2,6 @@ package laboratory.core.gui.action;
 
 import laboratory.common.genetic.Individual;
 import laboratory.core.gui.frame.GraphicFrame;
-import laboratory.core.gui.panel.GraphicPanel;
 import laboratory.core.InterfaceConfig;
 
 import javax.imageio.ImageIO;

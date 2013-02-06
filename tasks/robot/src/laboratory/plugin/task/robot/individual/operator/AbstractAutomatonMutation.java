@@ -16,9 +16,10 @@ public abstract class AbstractAutomatonMutation<I extends AbstractAutomaton> imp
 
     public I apply(I individual){
         I res = individual;
-        if(r.nextBoolean()){
+        if(r.nextDouble() < 0.05) {
             res = (I)res.setInitialState(r.nextInt(individual.getNumberStates()));
         }
+        
         Automaton.Transition[][] tr = res.getTransition();
         int temp = r.nextInt(tr.length);
         if(tr[temp][r.nextInt(tr[temp].length)] != null){

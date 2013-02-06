@@ -38,7 +38,7 @@ public class SimpleMover implements Mover{
         Automaton.Transition t = automaton.getTransition(current, w);
         int ends = t.getEndState();
         if(ends != -1){
-            char action = automaton.getAction(ends);
+            char action = t.getAction();
             current = ends;
             switch(action){
                 case 'L':

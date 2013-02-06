@@ -1,7 +1,5 @@
 package laboratory.plugin.task.ant;
 
-import java.util.jar.JarFile;
-
 public class StandardFitness {
 
     public double calk(Mover solution) {

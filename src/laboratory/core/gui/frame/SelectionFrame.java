@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import static java.awt.BorderLayout.*;
 
 import java.util.List;
-import java.util.LinkedList;
 
 public class SelectionFrame extends JFrame {
 

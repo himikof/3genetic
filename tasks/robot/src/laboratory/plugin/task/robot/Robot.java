@@ -17,7 +17,8 @@ public interface Robot {
     public Direction getDirection();
 
     public Cell getCurrent();
-    
+
+    public Cell getStart();
     public Cell getTarget();
 
     public enum Action{

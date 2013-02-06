@@ -110,6 +110,23 @@
         </antcall>
 
         <antcall target="build.plugin">
+            <param name="plugin" value="${individual.robot.mealy}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes"/>
+        </antcall>
+        
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.robot.mealy.mutation.standard}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes;
+                                                                                 ${build}/plugins/${individual.robot.mealy}/classes"/>
+        </antcall>
+
+        <antcall target="build.plugin">
+            <param name="plugin" value="${individual.robot.mealy.crossover.standard}"/>
+            <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes;
+                                                                                 ${build}/plugins/${individual.robot.mealy}/classes"/>
+        </antcall>
+
+        <antcall target="build.plugin">
             <param name="plugin" value="${individual.robot.moore}"/>
             <param name="plugin.classpath" value="${common.build}; ${util.build}; ${build}/plugins/${task.robot}/classes"/>
         </antcall>
@@ -133,6 +150,11 @@
         <antcall target="build.plugin">
             <param name="plugin" value="${visualizator.sAnt}"/>
             <param name="plugin.classpath" value="${util.build}; ${common.build}; ${build}/plugins/${task.ant}/classes"/>
+        </antcall>
+
+        <antcall target="build.plugin">
+            <param name="plugin" value="${visualizator.sRobot}"/>
+            <param name="plugin.classpath" value="${util.build}; ${common.build}; ${build}/plugins/${task.robot}/classes"/>
         </antcall>
 
     </target>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="algorithms/simple/selections/roulette/src"/>
+	<classpathentry kind="src" path="individuals/robot/mealy/operators/mutations/standard/src"/>
+	<classpathentry kind="src" path="individuals/robot/mealy/src"/>
+	<classpathentry kind="src" path="individuals/robot/mealy/operators/crossovers/Stcrossover/src"/>
+	<classpathentry kind="src" path="visualizators/sRobot/src"/>
 	<classpathentry kind="src" path="algorithms/custom/selections/custom/src"/>
 	<classpathentry kind="src" path="algorithms/custom/src"/>
 	<classpathentry kind="src" path="individuals/robot/moore/operators/mutations/standard/src"/>

@@ -14,9 +14,6 @@ import javax.swing.*;
 import java.util.jar.JarFile;
 import java.util.List;
 import java.io.File;
-import java.io.Writer;
-import java.io.PrintWriter;
-import java.io.FileNotFoundException;
 import java.awt.*;
 
 public class SimpleGALoader<I extends Individual> extends AbstractAlgorithmLoader<I> {

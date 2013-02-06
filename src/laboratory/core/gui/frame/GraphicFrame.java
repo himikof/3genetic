@@ -9,7 +9,6 @@ import laboratory.core.gui.action.ShowBestIndividualsAction;
 import laboratory.core.gui.action.SaveStatisticsAction;
 import laboratory.core.gui.action.SaveGraphicsAction;
 import laboratory.core.gui.graphic.GraphicManager;
-import laboratory.core.gui.graphic.GraphicInfo;
 import laboratory.common.loader.VisualizatorLoader;
 import laboratory.common.genetic.Individual;
 import laboratory.util.Parser;

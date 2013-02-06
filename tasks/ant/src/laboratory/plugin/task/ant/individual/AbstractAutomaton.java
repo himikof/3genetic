@@ -2,8 +2,6 @@ package laboratory.plugin.task.ant.individual;
 
 
 import laboratory.plugin.task.ant.StandardFitness;
-import laboratory.common.genetic.Individual;
-
 import java.util.Arrays;
 
 public abstract class AbstractAutomaton implements Automaton{

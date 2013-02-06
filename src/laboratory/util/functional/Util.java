@@ -1,8 +1,6 @@
 package laboratory.util.functional;
 
 import laboratory.util.functional.Functor1;
-import laboratory.common.Functor;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;

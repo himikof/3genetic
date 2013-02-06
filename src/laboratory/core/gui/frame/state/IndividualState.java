@@ -5,7 +5,6 @@ import laboratory.common.loader.IndividualLoader;
 import laboratory.common.loader.PluginLoader;
 import laboratory.common.loader.AlgorithmLoader;
 import laboratory.common.genetic.Individual;
-import laboratory.core.gui.frame.state.State;
 import laboratory.core.gui.frame.SelectionFrame;
 import laboratory.core.PluginCollection;
 import laboratory.core.InterfaceConfig;
@@ -69,7 +68,7 @@ public class IndividualState extends AbstractState {
         private <I extends Individual> List<PluginLoader> convert(List<AlgorithmLoader<I>> loaders) {
             return Util.map(loaders, new Functor1<AlgorithmLoader<I>, PluginLoader>() {
                 @Override
-                public AlgorithmLoader apply(AlgorithmLoader loader) {
+                public AlgorithmLoader<I> apply(AlgorithmLoader<I> loader) {
                     return loader;
                 }
             });

@@ -4,8 +4,6 @@ import laboratory.plugin.task.ant.Mover;
 import laboratory.plugin.task.ant.Ant;
 import laboratory.plugin.task.ant.SimpleAnt;
 
-import java.util.jar.JarFile;
-
 
 public class SimpleMover implements Mover{
 

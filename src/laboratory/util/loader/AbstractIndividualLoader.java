@@ -18,7 +18,6 @@ import java.util.jar.JarFile;
 import java.util.List;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Arrays;
 
 
 public abstract class AbstractIndividualLoader<I extends Individual> extends JarReader implements IndividualLoader<I> {
