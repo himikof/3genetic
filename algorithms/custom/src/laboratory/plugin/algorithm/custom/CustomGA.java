@@ -17,11 +17,8 @@ import java.util.*;
 public class CustomGA<I extends Individual> implements Algorithm<I>{
 
     private List<FitIndividual<I>> generation;
-
-    private final double probabilityMutation;
-    private final int bigMutationStepSize;
-    private final double elitismSize;
-    private final boolean useStabilizingBigMutation;
+    
+    private final Config config;
 
     private final IndividualFactory<I> factory;
 
@@ -37,10 +34,7 @@ public class CustomGA<I extends Individual> implements Algorithm<I>{
     public CustomGA(final List<I> generation, final IndividualFactory<I> factory,
                     final Mutation<I> mut, final Crossover<I> cross, final Selection<I> sel, final Fitness<I> fitness){
 
-        this.probabilityMutation = Config.getInstance().getMutationProbability();
-        this.elitismSize = Config.getInstance().getElitismSize();
-        this.bigMutationStepSize = Config.getInstance().getBigMutationSteps();
-        this.useStabilizingBigMutation = Config.getInstance().useStabilizingBigMutation();
+    	this.config = Config.getInstance();
 
         this.factory = factory;
 
@@ -85,24 +79,28 @@ public class CustomGA<I extends Individual> implements Algorithm<I>{
         return generation.get(r.nextInt(generation.size()));
     }
 
-    public void nextGeneration(){
-        int size = generation.size();
-        List<FitIndividual<I>> newGeneration = new ArrayList<FitIndividual<I>>(size);
-        newGeneration.addAll(sel.apply(generation, fixedPart));
-        while(newGeneration.size() + 1 <= generation.size()){
-            List<I> s = cross.apply(Arrays.asList(winner(randomI(), randomI()), winner(randomI(), randomI())));
-            for(I ind : s){
-                newGeneration.add(cons(ind));
+    public void nextGeneration() {
+    	int mu = config.getGenerationSize();
+    	int lambda = config.getChildrenCount();
+        List<FitIndividual<I>> children = new ArrayList<FitIndividual<I>>();
+        for (int i = 0; i < lambda; ++i) {
+        	List<I> parents = new ArrayList<I>();
+        	parents.add(randomI().ind);
+        	parents.add(randomI().ind);
+            List<I> s = cross.apply(parents);
+            assert s.size() == 1;
+            I child = s.get(0);
+            
+            if(r.nextDouble() < config.getMutationProbability()) {
+            	child = mut.apply(child);
             }
+            
+            children.add(cons(child));
         }
-        if(newGeneration.size() < size){
-            newGeneration.add(cons(mut.apply(randomI().ind)));
-        }
-        for(int i = 0;i < size;i ++){
-            if(r.nextDouble() < probabilityMutation){
-                newGeneration.set(i, cons(mut.apply(newGeneration.get(i).ind)));
-            }
-        }
+        
+        List<FitIndividual<I>> newGeneration = new ArrayList<FitIndividual<I>>();
+        //newGeneration.addAll(children.subList(0, mu));
+        newGeneration.addAll(sel.apply(children, mu));
         generation = newGeneration;
         Collections.sort(generation);
     }
@@ -118,14 +116,4 @@ public class CustomGA<I extends Individual> implements Algorithm<I>{
 
     public void stop(){
     }
-
-
-    public void bigMutation(){
-        for(int i = 0;i < generation.size();i++){
-            final I ind = factory.getIndividual();
-            generation.set(i, new FitIndividual<I>(ind, fitness.apply(ind)));
-        }
-        Collections.sort(generation);
-    }
-
 }

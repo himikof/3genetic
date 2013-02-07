@@ -15,7 +15,9 @@ public class CustomSelection<I extends Individual> implements Selection<I> {
 
     @Override
     public List<FitIndividual<I>> apply(final List<FitIndividual<I>> population, int m) {
-        final int n = population.size();
+    	//final int n = population.size();
+    	return population.subList(0, m);
+        /*final int n = population.size();
         final double[] weight = new double[n];
         weight[0] = population.get(0).fitness;
         for (int i = 1; i < n; i++) {
@@ -30,6 +32,6 @@ public class CustomSelection<I extends Individual> implements Selection<I> {
                 }
                 return population.get(i);
             }
-        }, m);
+        }, m);*/
     }
 }

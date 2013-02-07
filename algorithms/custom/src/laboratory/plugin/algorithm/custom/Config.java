@@ -34,43 +34,21 @@ public class Config{
     }
 
     private int generationSize;
-
-    public int getBigMutationSteps(){
-        return bigMutationSteps;
-    }
-
-    public void setBigMutationSteps(int bigMutationSteps){
-        this.bigMutationSteps = bigMutationSteps;
-    }
-
-    private int bigMutationSteps;
     
-    public boolean useStabilizingBigMutation() {
-        return useStabilizingBigMutation;
-    }
+    public int getChildrenCount() {
+		return childrenCount;
+	}
 
-    public void setUseStabilizingBigMutation(boolean useStabilizingBigMutation) {
-        this.useStabilizingBigMutation = useStabilizingBigMutation;
-    }
+	public void setChildrenCount(int childrenCount) {
+		this.childrenCount = childrenCount;
+	}
 
-    private boolean useStabilizingBigMutation;
-
-    public double getElitismSize() {
-        return elitismSize;
-    }
-
-    public void setElitismSize(double elitismSize) {
-        this.elitismSize = elitismSize;
-    }
-
-    private double elitismSize;
+	private int childrenCount;
     
     public void setJar(JarFile jar){
         Parser p = new Parser(JarReader.getProperties(jar, "algorithm.properties"));
         setGenerationSize(p.getInt("size.generation"));
-        setElitismSize(p.getDouble("size.elitism"));
         setMutationProbability(p.getDouble("probability.mutation"));
-        setBigMutationSteps(p.getInt("bigmutation.stepsize"));
-        setUseStabilizingBigMutation(p.getInt("bigmutation.usestabilizing") != 0);
+        setChildrenCount(p.getInt("size.children"));
     }
 }

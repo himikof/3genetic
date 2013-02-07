@@ -14,4 +14,8 @@ public class FitIndividual<I extends Individual> implements Comparable<FitIndivi
         return Double.compare(that.fitness, this.fitness);
     }
     
+    @Override
+    public String toString() {
+    	return "FI<" + ind + ", " + fitness + ">";
+    }
 }

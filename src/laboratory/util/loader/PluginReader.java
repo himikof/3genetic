@@ -44,7 +44,7 @@ public class PluginReader {
                 Class<Loader> c = (Class<Loader>) cl.loadClass(mainClass);
                 return c.getConstructor(JarFile.class, File.class).newInstance(jr, dir);
             } catch (Exception e) {
-                throw new RuntimeException(e.toString() + "\n" + dir);
+                throw new RuntimeException(e.toString() + "\n" + dir, e);
             }
         }
     }
