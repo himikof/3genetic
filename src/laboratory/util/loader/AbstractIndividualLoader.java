@@ -42,7 +42,7 @@ public abstract class AbstractIndividualLoader<I extends Individual> extends Jar
     };
 
     private final boolean[][] index = new boolean[4][];
-    private final List<OperatorLoader>[] loaders = new List[4];
+    private final List<OperatorLoader<?>>[] loaders = new List[4];
     private final List<String> titles = new LinkedList<String>();
     private final List<Integer> exists = new LinkedList<Integer>();
 
@@ -51,13 +51,13 @@ public abstract class AbstractIndividualLoader<I extends Individual> extends Jar
         for (int i = 0; i < 4; i++) {
             File ldir = new File(dir, DIR_NAME[i]);
             if (ldir.exists()) {
-                loaders[i] = Util.map(getJars(ldir), new LoaderFromJar<OperatorLoader>());
+                loaders[i] = Util.map(getJars(ldir), new LoaderFromJar<OperatorLoader<?>>());
                 index[i] = new boolean[loaders[i].size()];
                 if (index[i].length > 0) {
                     index[i][0] = true;
                 }
-                names.add(Util.map(loaders[i], new Functor1<OperatorLoader, String>() {
-                    public String apply(OperatorLoader nameable) {
+                names.add(Util.map(loaders[i], new Functor1<OperatorLoader<?>, String>() {
+                    public String apply(OperatorLoader<?> nameable) {
                         return nameable.getName();
                     }
                 }));
@@ -67,14 +67,14 @@ public abstract class AbstractIndividualLoader<I extends Individual> extends Jar
         }
     }
 
-    private <Operator> List getList(int i) {
+    private <Operator> List<Operator> getList(int i) {
         if (index[i] == null) {
             return Collections.emptyList();
         } else {
             List<OperatorLoader<Operator>> res = new LinkedList<OperatorLoader<Operator>>();
             for (int j = 0; j < index[i].length; j++) {
                 if (index[i][j]) {
-                    res.add(loaders[i].get(j));
+                    res.add((OperatorLoader<Operator>) loaders[i].get(j));
                 }
             }
             return Util.map(res, new Functor1<OperatorLoader<Operator>, Operator>() {
@@ -88,22 +88,22 @@ public abstract class AbstractIndividualLoader<I extends Individual> extends Jar
 
     @Override
     public List<IndividualFactory<I>> loadFactories() {
-        return (List<IndividualFactory<I>>) getList(INDEX_FACTORY);
+        return this.<IndividualFactory<I>>getList(INDEX_FACTORY);
     }
 
     @Override
     public List<Crossover<I>> loadCrossovers() {
-        return (List<Crossover<I>>) getList(INDEX_CROSSOVER);
+        return this.<Crossover<I>>getList(INDEX_CROSSOVER);
     }
 
     @Override
     public List<Mutation<I>> loadMutations() {
-        return (List<Mutation<I>>) getList(INDEX_MUTATION);
+        return this.<Mutation<I>>getList(INDEX_MUTATION);
     }
 
     @Override
     public List<Fitness<I>> loadFunctions() {
-        return (List<Fitness<I>>) getList(INDEX_FITNESS);
+        return this.<Fitness<I>>getList(INDEX_FITNESS);
     }
 
     private final List<List<String>> names = new LinkedList<List<String>>();

@@ -10,4 +10,6 @@ public interface Algorithm<I extends Individual> {
 
     public void stop();
     
+    public void reset();
+    
 }

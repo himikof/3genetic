@@ -89,9 +89,9 @@ public class Graph extends TreeMap<InternalNode, HashMap<InternalNode, LinkedLis
 
     public EdgePair edgeContains(Point p, int eps, double edgeEps){
         //boolean found = false;
-        for(Iterator it = keySet().iterator();it.hasNext();){
+        for(Iterator<InternalNode> it = keySet().iterator();it.hasNext();){
             InternalNode current = (InternalNode)it.next();
-            for(Iterator ei = getNeighbours(current).iterator();ei.hasNext();){
+            for(Iterator<InternalNode> ei = getNeighbours(current).iterator();ei.hasNext();){
 
                 InternalNode neighbour = (InternalNode)ei.next();
                 if(checkIfDoubleSideEdge(current, neighbour)){
@@ -147,9 +147,9 @@ public class Graph extends TreeMap<InternalNode, HashMap<InternalNode, LinkedLis
 
     public EdgePair loopContains(Point p, double deps){
         boolean found = false;
-        for(Iterator it = keySet().iterator();it.hasNext() && !found;){
+        for(Iterator<InternalNode> it = keySet().iterator();it.hasNext() && !found;){
             InternalNode current = (InternalNode)it.next();
-            for(Iterator ei = getNeighbours(current).iterator();ei.hasNext() && !found;){
+            for(Iterator<InternalNode> ei = getNeighbours(current).iterator();ei.hasNext() && !found;){
                 InternalNode neighbour = (InternalNode)ei.next();
                 if(neighbour.equals(current)){
                     if(Loop.Contains(current, p, deps)) return new EdgePair(current, current);

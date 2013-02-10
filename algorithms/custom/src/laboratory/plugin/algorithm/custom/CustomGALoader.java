@@ -1,6 +1,8 @@
 package laboratory.plugin.algorithm.custom;
 
+import laboratory.plugin.algorithm.custom.gui.ConfigDialog;
 import laboratory.util.loader.AbstractAlgorithmLoader;
+import laboratory.util.loader.JarReader;
 import laboratory.util.gui.config.Util;
 import laboratory.common.genetic.Individual;
 import laboratory.common.genetic.IndividualFactory;
@@ -17,10 +19,12 @@ import java.io.File;
 import java.awt.*;
 
 public class CustomGALoader<I extends Individual> extends AbstractAlgorithmLoader<I> {
-
+    
+    private Config prototype = new Config();
+    
     public CustomGALoader(JarFile file, File dir) {
         super(file, dir);
-        Config.getInstance().setJar(file);
+        prototype.setJar(file);
     }
 
     @Override
@@ -34,15 +38,19 @@ public class CustomGALoader<I extends Individual> extends AbstractAlgorithmLoade
 
     public Algorithm<I> loadAlgorithm(List<IndividualFactory<I>> individualFactories, List<Crossover<I>> crossovers,
                                       List<Mutation<I>> mutations, List<Selection<I>> sel, List<Fitness<I>> functions) {
+        Config config = prototype.clone();
         //ToDo: This section ought to be fixed. (Selection operator)
-        return new CustomGA<I>(Config.getInstance().getGenerationSize(), 
+        return new CustomGA<I>(config, 
                 individualFactories.get(0), mutations.get(0), 
                 crossovers.get(0), getSelections().get(0), functions.get(0));
     }
 
     @Override
     public JDialog getConfigDialog(JFrame owner) {
-        final JDialog dialog = getSelectionChooser(owner, "Custom Genetic Algortihm. Choose selection straregies");
+        //final JDialog dialog = getSelectionChooser(owner, "Custom Genetic Algortihm. Choose selection straregies");
+        final JDialog dialog = new ConfigDialog(owner, 
+                JarReader.getProperties(getJar(), "frame.config.properties"),
+                prototype);
         Util.setSize(dialog, new Dimension(300, 250));
         //Util.showModal(dialog);
         return dialog;

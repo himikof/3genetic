@@ -25,6 +25,7 @@ public interface Automaton extends Visualizable{
         public int getEndState();
 
         public Transition setEndState(int newEnd);
+        public void setEndStateM(int newEnd);
 
         public char getAction();
 

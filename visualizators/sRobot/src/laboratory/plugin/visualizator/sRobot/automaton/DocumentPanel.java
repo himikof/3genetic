@@ -1009,7 +1009,7 @@ public class DocumentPanel extends JPanel implements MouseListener, MouseMotionL
                 if(!selectedEdges.isEmpty()){
                     for(InternalNode temp : selectedEdges.keySet()){
                         for(InternalNode neighbour : selectedEdges.get(temp).keySet()){
-                            for(Iterator edge = graph.get(temp).get(neighbour).iterator();edge.hasNext();){
+                            for(Iterator<Edge> edge = graph.get(temp).get(neighbour).iterator();edge.hasNext();){
                                 edge.next();
                                 edge.remove();
                             }

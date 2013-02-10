@@ -1,22 +1,19 @@
 package laboratory.plugin.algorithm.selection.custom;
 
+import java.util.List;
+
 import laboratory.common.genetic.FitIndividual;
 import laboratory.common.genetic.Individual;
 import laboratory.common.genetic.operator.Selection;
-import laboratory.util.functional.Util;
-import laboratory.util.functional.Functor0;
-
-import java.util.List;
-import java.util.Random;
 
 public class CustomSelection<I extends Individual> implements Selection<I> {
 
-    private final Random random = new Random();
+    //private final Random random = new Random();
 
     @Override
     public List<FitIndividual<I>> apply(final List<FitIndividual<I>> population, int m) {
-    	//final int n = population.size();
     	return population.subList(0, m);
+    	
         /*final int n = population.size();
         final double[] weight = new double[n];
         weight[0] = population.get(0).fitness;

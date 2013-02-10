@@ -41,6 +41,10 @@ public class MooreAutomaton extends AbstractAutomaton {
         return actions[state];
     }
     
+    public void setActionM(int state, char action) {
+        actions[state] = action;
+    }
+    
     public Transition[][] getTransition(){
         Automaton.Transition[][] trs = getTransitionData();
         Transition[][] tr = new Transition[trs.length][];

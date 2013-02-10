@@ -68,8 +68,9 @@ public abstract class AbstractAlgorithmLoader<I extends Individual> extends JarR
     private final boolean[] index;
 
     public JDialog getSelectionChooser(JFrame owner, String title) {
-        return new OperatorChooserDialog(owner, title, new boolean[][]{index}, Arrays.asList(names), Arrays.asList(TITLE),
-                Arrays.asList(0));
+        return new OperatorChooserDialog(owner, title, new boolean[][]{index}, 
+                Collections.singletonList(names), Collections.singletonList(TITLE),
+                Collections.singletonList(0));
     }
 
     @Override

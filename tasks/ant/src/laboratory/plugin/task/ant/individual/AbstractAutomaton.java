@@ -61,9 +61,14 @@ public abstract class AbstractAutomaton implements Automaton{
 
     protected static abstract class Transition implements Automaton.Transition{
 
-        private final int endState;
+        private int endState;
 
         public Transition(int endState){
+            this.endState = endState;
+        }
+        
+        @Override
+        public void setEndStateM(int newEnd) {
             this.endState = endState;
         }
 

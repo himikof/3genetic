@@ -19,10 +19,11 @@ public class SimpleGA<I extends Individual> implements Algorithm<I>{
     private List<FitIndividual<I>> generation;
 
     private final double probabilityMutation;
+    private final int generationSize;
 
     private final IndividualFactory<I> factory;
 
-    private final Random r;
+    private Random r;
 
     private final Mutation<I> mut;
     private final Crossover<I> cross;
@@ -31,10 +32,11 @@ public class SimpleGA<I extends Individual> implements Algorithm<I>{
 
     private final int fixedPart;
 
-    public SimpleGA(final List<I> generation, final double probabilityMutation, final IndividualFactory<I> factory,
+    public SimpleGA(final int generationSize, final double probabilityMutation, final IndividualFactory<I> factory,
                     final Mutation<I> mut, final Crossover<I> cross, final Selection<I> sel, final Fitness<I> fitness){
 
         this.probabilityMutation = probabilityMutation;
+        this.generationSize = generationSize;
 
         this.factory = factory;
 
@@ -43,28 +45,20 @@ public class SimpleGA<I extends Individual> implements Algorithm<I>{
         this.sel = sel;
         this.fitness = fitness;
 
-        this.generation = Util.map(generation, new Functor1<I, FitIndividual<I>>(){
-            public FitIndividual<I> apply(I i){
-                return cons(i);
-            }
-        });
-        Collections.sort(this.generation);
-
         //ToDo: Rewrite this!!
-        fixedPart = generation.size() / 2;
+        fixedPart = generationSize / 2;
 
-
-        r = new Random();
+        reset();
     }
 
-    public SimpleGA(final int sizeGeneration, final double probabilityMutation, final IndividualFactory<I> factory,
-                    final Mutation<I> mut, final Crossover<I> cross, final Selection<I> sel, final Fitness<I> fitness){
-        this(Util.listFromFunctor(new Functor0<I>(){
-                     public I apply(){
-                         return factory.getIndividual();
-                     }
-                 }, sizeGeneration),
-             probabilityMutation, factory, mut, cross, sel, fitness);
+    public void reset() {
+        this.generation = Util.listFromFunctor(new Functor0<FitIndividual<I>>(){
+            public FitIndividual<I> apply(){
+                return cons(factory.getIndividual());
+            }
+        }, generationSize);
+        Collections.sort(this.generation);
+        r = new Random();
     }
 
     private I winner(FitIndividual<I> a1, FitIndividual<I> a2){
@@ -83,18 +77,19 @@ public class SimpleGA<I extends Individual> implements Algorithm<I>{
         int size = generation.size();
         List<FitIndividual<I>> newGeneration = new ArrayList<FitIndividual<I>>(size);
         newGeneration.addAll(sel.apply(generation, fixedPart));
-        while(newGeneration.size() + 1 <= generation.size()){
-            List<I> s = cross.apply(Arrays.asList(winner(randomI(), randomI()), winner(randomI(), randomI())));
+        while(newGeneration.size() + 1 <= generation.size()) {
+            List<I> s = cross.apply(Arrays.asList(winner(randomI(), randomI()), winner(randomI(), randomI())),
+                    factory);
             for(I ind : s){
                 newGeneration.add(cons(ind));
             }
         }
         if(newGeneration.size() < size){
-            newGeneration.add(cons(mut.apply(randomI().ind)));
+            newGeneration.add(cons(mut.apply(randomI().ind, factory)));
         }
         for(int i = 0;i < size;i ++){
             if(r.nextDouble() < probabilityMutation){
-                newGeneration.set(i, cons(mut.apply(newGeneration.get(i).ind)));
+                newGeneration.set(i, cons(mut.apply(newGeneration.get(i).ind, factory)));
             }
         }
         generation = newGeneration;

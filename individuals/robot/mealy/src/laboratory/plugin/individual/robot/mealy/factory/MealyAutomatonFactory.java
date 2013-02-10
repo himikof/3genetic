@@ -2,6 +2,7 @@ package laboratory.plugin.individual.robot.mealy.factory;
 
 import laboratory.plugin.individual.robot.mealy.MealyAutomaton;
 import laboratory.plugin.task.robot.Robot;
+import laboratory.plugin.task.robot.individual.Automaton;
 import laboratory.plugin.task.robot.individual.factory.AutomatonFactory;
 
 
@@ -28,4 +29,19 @@ public class MealyAutomatonFactory extends AutomatonFactory<MealyAutomaton>{
         }
         return new MealyAutomaton(r.nextInt(ns), tr, na);
     }*/
+    
+    @Override
+    public MealyAutomaton cloneIndividual(MealyAutomaton source) {
+        int ns = source.getNumberStates();
+        MealyAutomaton.Transition[][] tr = new MealyAutomaton.Transition[ns][2];
+        Automaton.Transition[][] str = source.getTransition();
+        for(int i = 0;i < ns; i++ ) {
+            for (int j = 0; j <= 1; ++j) {
+                tr[i][j] = new MealyAutomaton.Transition(str[i][j].getEndState(),
+                        str[i][j].getAction());
+            }
+        }
+        return new MealyAutomaton(source.getInitialState(), tr);
+    }
+    
 }

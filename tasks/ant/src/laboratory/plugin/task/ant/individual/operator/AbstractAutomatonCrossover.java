@@ -2,6 +2,7 @@ package laboratory.plugin.task.ant.individual.operator;
 
 import laboratory.plugin.task.ant.individual.AbstractAutomaton;
 import laboratory.plugin.task.ant.individual.Automaton;
+import laboratory.common.genetic.IndividualFactory;
 import laboratory.common.genetic.operator.Crossover;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class AbstractAutomatonCrossover<I extends AbstractAutomaton> implements 
         this.r = r;
     }
 
-    public List<I> apply(List<I> parents){
+    public List<I> apply(List<I> parents, IndividualFactory<I> factory){
         I s = parents.get(0);
         I s1 = parents.get(1);
         I p = s;
@@ -72,7 +73,7 @@ public class AbstractAutomatonCrossover<I extends AbstractAutomaton> implements 
                     List<I> list = new ArrayList<I>();
                     list.add((I)p.getNestedAutomaton());
                     list.add((I)p1.getNestedAutomaton());
-                    List<I> temp = apply(list);
+                    List<I> temp = apply(list, factory);
 
                     s = (I)s.setNestedAutomaton(temp.get(0));
                     s1 = (I)s1.setNestedAutomaton(temp.get(1));

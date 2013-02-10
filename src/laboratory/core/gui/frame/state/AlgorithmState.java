@@ -23,7 +23,7 @@ public class AlgorithmState<I extends Individual> extends AbstractState {
     private final TaskLoader taskLoader;
     private final IndividualState previousState;
 
-    public AlgorithmState(SelectionFrame frame, IndividualLoader individualLoader, IndividualState previousState, TaskLoader taskLoader) {
+    public AlgorithmState(SelectionFrame frame, IndividualLoader<I> individualLoader, IndividualState previousState, TaskLoader taskLoader) {
         this.frame = frame;
         this.individualLoader = individualLoader;
         this.previousState = previousState;
@@ -41,7 +41,8 @@ public class AlgorithmState<I extends Individual> extends AbstractState {
             new Thread(runner).start();
             String title = gfp.getString("title") + individualLoader.getTaskName() + ", Individual - " + individualLoader.getName() +
                     ", Genetic Algortihm - " + loader.getName();
-            final GraphicFrame gf = new GraphicFrame<I>(title, GraphicManager.getInstance().addGraphic(
+            final GraphicManager<I> gm = GraphicManager.getInstance();
+            final GraphicFrame<I> gf = new GraphicFrame<I>(title, gm.addGraphic(
                     new GraphicInfo<I>(taskLoader, individualLoader, loader, runner)),
                     PluginCollection.getInstance().loadVisualizators(individualLoader));
             gf.setSize(gfp.getInt("width"), gfp.getInt("height"));

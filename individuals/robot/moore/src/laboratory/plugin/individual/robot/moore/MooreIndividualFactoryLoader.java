@@ -1,5 +1,14 @@
 package laboratory.plugin.individual.robot.moore;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.jar.JarFile;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
 import laboratory.common.genetic.IndividualFactory;
 import laboratory.common.genetic.operator.Fitness;
 import laboratory.plugin.individual.robot.moore.factory.MooreAutomatonFactory;
@@ -7,13 +16,6 @@ import laboratory.plugin.individual.robot.moore.gui.ConfigDialog;
 import laboratory.util.StandardFitness;
 import laboratory.util.loader.AbstractIndividualLoader;
 import laboratory.util.loader.JarReader;
-
-import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.jar.JarFile;
 
 public class MooreIndividualFactoryLoader extends AbstractIndividualLoader<MooreAutomaton> {
 
@@ -25,7 +27,7 @@ public class MooreIndividualFactoryLoader extends AbstractIndividualLoader<Moore
 
     @Override
     public List<IndividualFactory<MooreAutomaton>> loadFactories() {
-        return Arrays.asList((IndividualFactory<MooreAutomaton>) new MooreAutomatonFactory(Config.getInstance().getEx()));
+        return Collections.singletonList((IndividualFactory<MooreAutomaton>) new MooreAutomatonFactory(Config.getInstance().getEx()));
     }
 
     @Override

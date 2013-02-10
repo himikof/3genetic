@@ -28,7 +28,7 @@ public class MealyAutomaton extends AbstractAutomaton {
 
     public static class Transition extends AbstractAutomaton.Transition {
 
-        private final char action;
+        private char action;
 
         public Transition(int endState, char action) {
             super(endState);
@@ -41,6 +41,10 @@ public class MealyAutomaton extends AbstractAutomaton {
 
         public char getAction() {
             return action;
+        }
+        
+        public void setActionM(char action) {
+            this.action = action;
         }
 
         public String toString() {

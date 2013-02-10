@@ -1,12 +1,13 @@
 package laboratory.plugin.task.robot.individual.operator;
 
-import laboratory.plugin.task.robot.individual.AbstractAutomaton;
-import laboratory.plugin.task.robot.individual.Automaton;
-import laboratory.common.genetic.operator.Crossover;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.ArrayList;
+
+import laboratory.common.genetic.IndividualFactory;
+import laboratory.common.genetic.operator.Crossover;
+import laboratory.plugin.task.robot.individual.AbstractAutomaton;
+import laboratory.plugin.task.robot.individual.Automaton;
 
 public class AbstractAutomatonCrossover<I extends AbstractAutomaton> implements Crossover<I>{
 
@@ -16,14 +17,14 @@ public class AbstractAutomatonCrossover<I extends AbstractAutomaton> implements 
         this.r = r;
     }
 
-    public List<I> apply(List<I> parents){
-        I s = parents.get(0);
-        I s1 = parents.get(1);
-        I p = s;
-        I p1 = s1;
+    public List<I> apply(List<I> parents, IndividualFactory<I> factory){
+        I p = parents.get(0);
+        I p1 = parents.get(1);
+        I s = factory.cloneIndividual(p);
+        I s1 = factory.cloneIndividual(p1);
         if(r.nextBoolean()){
-            s = (I)s.setInitialState(p1.getInitialState());
-            s1 = (I)s1.setInitialState(p.getInitialState());
+            s.setInitialStateM(p1.getInitialState());
+            s1.setInitialStateM(p.getInitialState());
         }
 
         Automaton.Transition[][] tr = s.getTransition();
@@ -59,8 +60,8 @@ public class AbstractAutomatonCrossover<I extends AbstractAutomaton> implements 
             }
         }
 
-        s = (I)s.setTransitions(tr);
-        s1 = (I)s1.setTransitions(tr1);
+        //s = (I)s.setTransitions(tr);
+        //s1 = (I)s1.setTransitions(tr1);
 
         ArrayList<I> res = new ArrayList<I>();
         res.add(s);

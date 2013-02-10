@@ -1,22 +1,23 @@
 package laboratory.core.gui.graphic;
 
+import laboratory.common.genetic.Individual;
 import laboratory.core.Paths;
 
 import java.util.ArrayList;
 import java.io.File;
 
-public class GraphicManager {
+public class GraphicManager<I extends Individual> {
 
-    private final ArrayList<GraphicInfo> graphics = new ArrayList<GraphicInfo>();
+    private final ArrayList<GraphicInfo<I>> graphics = new ArrayList<GraphicInfo<I>>();
     private final ArrayList<File> directories = new ArrayList<File>();
 
-    public int addGraphic(GraphicInfo info) {
+    public int addGraphic(GraphicInfo<I> info) {
         graphics.add(info);
         directories.add(null);
         return graphics.size() - 1;
     }
 
-    public GraphicInfo getInfo(int i) {
+    public GraphicInfo<I> getInfo(int i) {
         return graphics.get(i);
     }
 

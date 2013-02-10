@@ -2,6 +2,7 @@ package laboratory.plugin.task.ant.individual.operator;
 
 import laboratory.plugin.task.ant.individual.AbstractAutomaton;
 import laboratory.plugin.task.ant.individual.Automaton;
+import laboratory.common.genetic.IndividualFactory;
 import laboratory.common.genetic.operator.Mutation;
 
 import java.util.Random;
@@ -14,7 +15,7 @@ public abstract class AbstractAutomatonMutation<I extends AbstractAutomaton> imp
         this.r = r;
     }
 
-    public I apply(I individual){
+    public I apply(I individual, IndividualFactory<I> factory){
         I res = individual;
         if(r.nextBoolean()){
             res = (I)res.setInitialState(r.nextInt(individual.getNumberStates()));
@@ -26,7 +27,7 @@ public abstract class AbstractAutomatonMutation<I extends AbstractAutomaton> imp
         }
         res = (I)res.setTransitions(tr);
         if((res.getNestedAutomaton() != null) && (r.nextBoolean())){
-            res = (I)res.setNestedAutomaton(apply((I)res.getNestedAutomaton()));
+            res = (I)res.setNestedAutomaton(apply((I)res.getNestedAutomaton(), factory));
         }
         return res;
     }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public abstract class AbstractAutomaton implements Automaton{
 
-    private final int initialState;
+    private int initialState;
     private final Automaton.Transition[][] transition;
 
     private double fitness;
@@ -23,7 +23,11 @@ public abstract class AbstractAutomaton implements Automaton{
     public int getInitialState(){
         return initialState;
     }
-
+  
+    @Override
+    public void setInitialStateM(int newIS) {
+        initialState = newIS;
+    }
     public Automaton.Transition getTransition(int i, int c){
         return transition[i][c];
     }
@@ -62,9 +66,13 @@ public abstract class AbstractAutomaton implements Automaton{
 
     protected static abstract class Transition implements Automaton.Transition{
 
-        private final int endState;
+        private int endState;
 
         public Transition(int endState){
+            this.endState = endState;
+        }
+        
+        public void setEndStateM(int endState) {
             this.endState = endState;
         }
 

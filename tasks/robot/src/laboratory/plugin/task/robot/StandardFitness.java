@@ -17,7 +17,7 @@ public class StandardFitness {
         }
         int distance = Math.abs(r.getCurrent().x - r.getTarget().x) +
                 Math.abs(r.getCurrent().y - r.getTarget().y);
-        return -distance - steps / 200.0;
+        return -distance - (steps - 200);
     }
 
     private static StandardFitness ourInstance = new StandardFitness();

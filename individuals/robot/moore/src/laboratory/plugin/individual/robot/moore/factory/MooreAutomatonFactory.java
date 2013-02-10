@@ -2,6 +2,7 @@ package laboratory.plugin.individual.robot.moore.factory;
 
 import laboratory.plugin.individual.robot.moore.MooreAutomaton;
 import laboratory.plugin.task.robot.Robot;
+import laboratory.plugin.task.robot.individual.Automaton;
 import laboratory.plugin.task.robot.individual.factory.AutomatonFactory;
 
 
@@ -30,4 +31,21 @@ public class MooreAutomatonFactory extends AutomatonFactory<MooreAutomaton>{
         }
         return new MooreAutomaton(r.nextInt(ns), tr, na);
     }*/
+    @Override
+    public MooreAutomaton cloneIndividual(MooreAutomaton source) {
+        int ns = source.getNumberStates();
+        MooreAutomaton.Transition[][] tr = new MooreAutomaton.Transition[ns][2];
+        Automaton.Transition[][] str = source.getTransition();
+        for(int i = 0;i < ns; i++ ) {
+            for (int j = 0; j <= 1; ++j) {
+                tr[i][j] = new MooreAutomaton.Transition(str[i][j].getEndState());
+            }
+        }
+        char[] actions = new char[ns];
+        for (int i = 0; i < ns; ++i) {
+            actions[i] = source.getAction(i);
+        }
+        return new MooreAutomaton(source.getInitialState(), tr, actions);
+    }
+
 }

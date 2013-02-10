@@ -21,6 +21,10 @@ public class Parser {
     public int getInt(String name) {
         return Integer.parseInt(new StringTokenizer(properties.getProperty(name)).nextToken());
     }
+    
+    public boolean getBoolean(String name) {
+        return Boolean.parseBoolean(new StringTokenizer(properties.getProperty(name)).nextToken());
+    }
 
     public String getString(String name) {
         return properties.getProperty(name);

@@ -36,17 +36,22 @@ public class IndividualState extends AbstractState {
 
     @Override
     public void next() {
-        IndividualLoader loader = (IndividualLoader) frame.getCurrentLoader();
+        IndividualLoader<?> loader = (IndividualLoader<?>) frame.getCurrentLoader();
         List<PluginLoader> lds = convert(PluginCollection.getInstance().loadAlgorithms());
         if (!(showWarning(loader.getName(), "factories", loader.loadFactories()) ||
                 showWarning(loader.getName(), "crossovers", loader.loadCrossovers()) ||
                 showWarning(loader.getName(), "mutations", loader.loadMutations()) ||
                 showWarning(loader.getName(), "fitness-functions", loader.loadFunctions()))) {
-            frame.setState(new AlgorithmState(frame, loader, this, taskLoader));
+            frame.setState(makeState(frame, loader, taskLoader));
             frame.setStatus(taskLoader.getName() + " > " + loader.getName());
             frame.setLoaders(lds);
             frame.setNextButtonText(InterfaceConfig.SELECTION_FRAME_PROPERTIES.getString("next-button-load"));            
         }
+    }
+    
+    private <I extends Individual> AlgorithmState<I> makeState(SelectionFrame frame,
+            IndividualLoader<I> individualLoader, TaskLoader taskLoader) {
+        return new AlgorithmState<I>(frame, individualLoader, this, taskLoader); 
     }
 
     @Override

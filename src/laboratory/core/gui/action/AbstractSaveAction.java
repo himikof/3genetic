@@ -26,7 +26,7 @@ public abstract class AbstractSaveAction<I extends Individual> extends AbstractA
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        GraphicManager manager = GraphicManager.getInstance();
+        GraphicManager<I> manager = GraphicManager.getInstance();
         try {
             if (!manager.resultDirExists(index)) {
                 Parser p = InterfaceConfig.MENU_PROPERTIES;

@@ -88,6 +88,8 @@ public class AlgorithmRunner<I extends Individual> implements Runnable {
                 return new ArrayList<Double>();
             }
         }, functors.size());
+        //ToDo: This section ought to be fixed. (Selection operator)
+        algorithm = loader.loadAlgorithm(factories, crossovers, mutations, null, functions);
     }
 
     public void pause() {
@@ -120,8 +122,7 @@ public class AlgorithmRunner<I extends Individual> implements Runnable {
         bestIndividuals.clear();
         bestFitnessValues.clear();
         time.clear();
-        //ToDo: This section ought to be fixed. (Selection operator)
-        algorithm = loader.loadAlgorithm(factories, crossovers, mutations, null, functions);
+        algorithm.reset();
         resume();
     }
 
