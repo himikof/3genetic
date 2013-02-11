@@ -16,9 +16,11 @@ public class StandardMutation extends AbstractAutomatonMutation<MealyAutomaton>{
         super(r);
     }
 
+    private static final double MUTATION_PROBABILITY = 0.07;
+    
     public MealyAutomaton apply(MealyAutomaton individual, IndividualFactory<MealyAutomaton> factory){
         MealyAutomaton res = factory.cloneIndividual(individual);
-        if(r.nextDouble() < 0.05) {
+        if(r.nextDouble() < MUTATION_PROBABILITY) {
             res.setInitialStateM(r.nextInt(individual.getNumberStates()));
         }
         
@@ -27,7 +29,7 @@ public class StandardMutation extends AbstractAutomatonMutation<MealyAutomaton>{
         for (int i = 0; i < tr.length; ++i) {
             for (int j = 0; j <= 1; ++j) {
                 MealyAutomaton.Transition t = (MealyAutomaton.Transition) tr[i][j];
-                if (r.nextDouble() < 0.05) {
+                if (r.nextDouble() < MUTATION_PROBABILITY) {
                     t.setEndStateM(r.nextInt(tr.length));
                     t.setActionM(Robot.ACTION_VALUES[r.nextInt(3)]);
                 }

@@ -91,7 +91,12 @@ public class CustomGA<I extends Individual> implements Algorithm<I>{
         
         List<FitIndividual<I>> newGeneration = new ArrayList<FitIndividual<I>>();
         //newGeneration.addAll(children.subList(0, mu));
-        newGeneration.addAll(sel.apply(children, mu));
+        int elSize = 0;
+        /*if (r.nextDouble() < 1) {
+            elSize = Math.max((int)(mu * 0.02), 1);
+            newGeneration.addAll(sel.apply(generation, elSize));
+        }*/
+        newGeneration.addAll(sel.apply(children, mu - elSize));
         generation = newGeneration;
         //Collections.sort(generation);
     }
