@@ -107,4 +107,11 @@ public class CustomGA<I extends Individual> implements Algorithm<I>{
 
     public void stop(){
     }
+
+    @Override
+    public String getTitle() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CustomGA: ").append(config.toString());
+        return sb.toString();
+    }
 }

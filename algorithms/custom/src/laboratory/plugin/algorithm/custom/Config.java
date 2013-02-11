@@ -67,4 +67,13 @@ public class Config implements Cloneable {
         setChildrenCount(p.getInt("size.children"));
         setUsingCrossover(p.getBoolean("use.crossover"));
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("mu=").append(getGenerationSize()).append(",");
+        sb.append("lambda=").append(getChildrenCount()).append(",");
+        sb.append("rho=").append(isUsingCrossover() ? 2 : 1);
+        return sb.toString();
+    }
 }

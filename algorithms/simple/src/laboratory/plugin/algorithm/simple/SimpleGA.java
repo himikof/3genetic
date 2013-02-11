@@ -117,4 +117,9 @@ public class SimpleGA<I extends Individual> implements Algorithm<I>{
         Collections.sort(generation);
     }
 
+    @Override
+    public String getTitle() {
+        return null;
+    }
+
 }

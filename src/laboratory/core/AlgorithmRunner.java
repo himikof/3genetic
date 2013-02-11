@@ -157,4 +157,8 @@ public class AlgorithmRunner<I extends Individual> implements Runnable {
         return currentFitnessValues;
     }
 
+    public String getTitle() {
+        return algorithm.getTitle();
+    }
+    
 }

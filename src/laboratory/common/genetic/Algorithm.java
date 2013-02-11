@@ -12,4 +12,6 @@ public interface Algorithm<I extends Individual> {
     
     public void reset();
     
+    public String getTitle();
+    
 }

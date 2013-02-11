@@ -62,4 +62,20 @@ public class MealyAutomaton extends AbstractAutomaton {
         return StandardFitness.getInstance().calc(new MealyMover(this));
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("states=").append(getNumberStates()).append('\n');
+        sb.append("initial=").append(getInitialState()).append('\n');
+        String[] events = new String[] {"S", "W"};
+        for (int i = 0; i < getNumberStates(); ++i) {
+            for (int j = 0; j < 2; ++j) {
+                Transition t = (Transition) getTransition(i, j);
+                sb.append("tr.").append(i).append(".").append(events[j]);
+                sb.append('=').append(t.getEndState()).append(',');
+                sb.append(t.action).append('\n');
+            }
+        }
+        return sb.toString();
+    }
 }

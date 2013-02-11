@@ -41,6 +41,9 @@ public class AlgorithmState<I extends Individual> extends AbstractState {
             new Thread(runner).start();
             String title = gfp.getString("title") + individualLoader.getTaskName() + ", Individual - " + individualLoader.getName() +
                     ", Genetic Algortihm - " + loader.getName();
+            if (runner.getTitle() != null) {
+                title = runner.getTitle();
+            }
             final GraphicManager<I> gm = GraphicManager.getInstance();
             final GraphicFrame<I> gf = new GraphicFrame<I>(title, gm.addGraphic(
                     new GraphicInfo<I>(taskLoader, individualLoader, loader, runner)),
