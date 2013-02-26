@@ -98,7 +98,9 @@ public class CustomGA<I extends Individual> implements Algorithm<I>{
         }*/
         newGeneration.addAll(sel.apply(children, mu - elSize));
         generation = newGeneration;
-        //Collections.sort(generation);
+        if (elSize > 0) {
+            Collections.sort(generation);
+        }
     }
 
 

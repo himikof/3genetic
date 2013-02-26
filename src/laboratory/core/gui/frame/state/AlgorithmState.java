@@ -3,6 +3,7 @@ package laboratory.core.gui.frame.state;
 import laboratory.core.InterfaceConfig;
 import laboratory.core.AlgorithmRunner;
 import laboratory.core.PluginCollection;
+import laboratory.core.gui.frame.BatchGraphicFrame;
 import laboratory.core.gui.frame.SelectionFrame;
 import laboratory.core.gui.frame.GraphicFrame;
 import laboratory.core.gui.graphic.GraphicManager;
@@ -36,21 +37,34 @@ public class AlgorithmState<I extends Individual> extends AbstractState {
         final AlgorithmLoader<I> loader = (AlgorithmLoader<I>) frame.getCurrentLoader();
         final String message = loader.getMessage();
         if (message.equals("OK")) {
-            final AlgorithmRunner<I> runner = new AlgorithmRunner<I>(loader, individualLoader.loadFactories(),
-                    individualLoader.loadCrossovers(), individualLoader.loadMutations(), individualLoader.loadFunctions());
-            new Thread(runner).start();
-            String title = gfp.getString("title") + individualLoader.getTaskName() + ", Individual - " + individualLoader.getName() +
-                    ", Genetic Algortihm - " + loader.getName();
-            if (runner.getTitle() != null) {
-                title = runner.getTitle();
-            }
             final GraphicManager<I> gm = GraphicManager.getInstance();
-            final GraphicFrame<I> gf = new GraphicFrame<I>(title, gm.addGraphic(
-                    new GraphicInfo<I>(taskLoader, individualLoader, loader, runner)),
-                    PluginCollection.getInstance().loadVisualizators(individualLoader));
-            gf.setSize(gfp.getInt("width"), gfp.getInt("height"));
-            gf.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-            gf.setVisible(true);
+            int batchSize = 20;
+            if (batchSize == 0) {
+                final AlgorithmRunner<I> runner = new AlgorithmRunner<I>(loader, individualLoader.loadFactories(),
+                        individualLoader.loadCrossovers(), individualLoader.loadMutations(), individualLoader.loadFunctions());
+                new Thread(runner).start();
+                String title = gfp.getString("title") + individualLoader.getTaskName() + ", Individual - " + individualLoader.getName() +
+                        ", Genetic Algortihm - " + loader.getName();
+                if (runner.getTitle() != null) {
+                    title = runner.getTitle();
+                }
+                final GraphicFrame<I> gf = new GraphicFrame<I>(title, gm.addGraphic(
+                        new GraphicInfo<I>(taskLoader, individualLoader, loader, runner)),
+                        PluginCollection.getInstance().loadVisualizators(individualLoader));
+                gf.setSize(gfp.getInt("width"), gfp.getInt("height"));
+                gf.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+                gf.setVisible(true);
+            } else {
+                String title = gfp.getString("title") + individualLoader.getTaskName() + ", Individual - " + individualLoader.getName() +
+                        ", Genetic Algortihm - " + loader.getName();
+                final BatchGraphicFrame<I> gf = new BatchGraphicFrame<I>(title,
+                        batchSize, loader, individualLoader, 
+                        PluginCollection.getInstance().loadVisualizators(individualLoader),
+                        gm.addGraphic(null));
+                gf.setSize(gfp.getInt("width"), gfp.getInt("height"));
+                gf.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+                gf.setVisible(true);
+            }
         } else {
             JOptionPane.showMessageDialog(frame, message);
         }

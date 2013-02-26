@@ -68,8 +68,8 @@ public class GraphicPanel extends JPanel {
         // create the chart...
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "",       // chart title
-                "Generation's index",                        // domain axis label
-                "Standard fitness-function",                        // range axis label
+                "Generation number",                        // domain axis label
+                "Standard fitness function",                        // range axis label
                 dataset,                  // data
                 PlotOrientation.VERTICAL, // orientation
                 true,                     // include legend

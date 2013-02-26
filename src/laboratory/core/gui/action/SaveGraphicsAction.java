@@ -15,7 +15,7 @@ public class SaveGraphicsAction<I extends Individual> extends AbstractSaveAction
 
     private final JPanel graphic;
 
-    public SaveGraphicsAction(int index, GraphicFrame<I> frame, JPanel graphic) {
+    public SaveGraphicsAction(int index, JFrame frame, JPanel graphic) {
         super(InterfaceConfig.MENU_PROPERTIES.getString("save-graphics-name"),
                 InterfaceConfig.MENU_PROPERTIES.getString("save-graphics-short-description"), index, frame);
         this.graphic = graphic;
